@@ -1,0 +1,15 @@
+Instead of using Pololu/microcontroller libraries directly, create a header file with generic functions specific to our application (e.g. read_line_sensor(int n), start_wheels(int n)).
+All code makes calls to this intermediate library.
+Then 2 versions of the library are made: one that runs on the robot and makes Pololu calls and one that runs on a simulator which simulates a little robot.
+
+
+main
+	- start the robot/simulator threads
+robot
+	- single functions which contain infinite loops that contain all robot-logic
+robot-api
+	- contain proxy functions which either call Pololu functions or simulator functions depending on which system the robot is being compiled for
+simulator
+	- contains everything necessary to for the simulator (OpenGL)
+
+
